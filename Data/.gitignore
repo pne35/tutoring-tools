@@ -1,0 +1,11 @@
+# Real client data - never commit
+Data/clients.json
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.env
+
+# VS Code
+.vscode/
