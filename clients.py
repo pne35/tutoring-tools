@@ -17,6 +17,53 @@ def load_clients(file_path=CLIENTS_FILE):
 
     return data.get("clients", [])
 
+def mark_session_paid(file_path=CLIENTS_FILE):
+    """Mark a session as paid for a client."""
+    clients = load_clients(file_path)
+
+    if not clients:
+        print("No clients found.")
+        return
+
+    view_clients(clients)
+
+    try:
+        client_id = int(input("\nEnter client ID: ").strip())
+    except ValueError:
+        print("Invalid ID.")
+        return
+
+    client = find_client(clients, client_id)
+    if client is None:
+        print("No client found with that ID.")
+        return
+
+    sessions = client.get("sessions", [])
+    unpaid = [(i, s) for i, s in enumerate(sessions) if not s.get("paid", False)]
+
+    if not unpaid:
+        print(f"No unpaid sessions for {client['name']}.")
+        return
+
+    print(f"\nUnpaid sessions for {client['name']}:")
+    for i, session in unpaid:
+        amount = client["rate"] * session.get("duration", 0)
+        print(f"  [{i}] {session['date']} — {session['topic']} — £{amount:.2f}")
+
+    try:
+        index = int(input("\nEnter session number to mark as paid: ").strip())
+    except ValueError:
+        print("Invalid input.")
+        return
+
+    if index not in [i for i, _ in unpaid]:
+        print("Invalid session number.")
+        return
+
+    client["sessions"][index]["paid"] = True
+    save_clients(clients, file_path)
+    print(f"✅ Session marked as paid.")
+
 def earnings_summary(file_path=CLIENTS_FILE):
     """Print weekly and monthly earnings summary."""
     clients = load_clients(file_path)

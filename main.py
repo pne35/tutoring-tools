@@ -1,4 +1,4 @@
-from clients import add_client, add_session, view_clients, load_clients, earnings_summary
+from clients import add_client, add_session, view_clients, load_clients, earnings_summary, mark_session_paid
 
 
 def main():
@@ -9,6 +9,7 @@ def main():
 2. View Clients
 3. Log Session
 4. Earnings Summary
+5. Mark Session as Paid
 5. Exit
 """)
         choice = input("Choose an option: ").strip()
@@ -27,6 +28,9 @@ def main():
             earnings_summary()
 
         elif choice == "5":
+            mark_session_paid()
+
+        elif choice == "6":
             print("Goodbye!")
             break
 
