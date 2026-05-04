@@ -34,3 +34,6 @@ python main.py
  
 Built by Harry Smalley - A-Level Maths, Further Maths & Computing student at LUSoM Sixth Form, Lancaster.
 https://pne35.github.io/HarrySmalley/
+
+## Data Privacy
+This project uses sample data only. Real client data is stored locally and excluded via `.gitignore`.
