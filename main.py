@@ -1,4 +1,4 @@
-from clients import add_client, add_session, view_clients, load_clients
+from clients import add_client, add_session, view_clients, load_clients, earnings_summary
 
 
 def main():
@@ -8,7 +8,8 @@ def main():
 1. Add Client
 2. View Clients
 3. Log Session
-4. Exit
+4. Earnings Summary
+5. Exit
 """)
         choice = input("Choose an option: ").strip()
 
@@ -23,7 +24,10 @@ def main():
             add_session()
 
         elif choice == "4":
-            print("Goodbye.")
+            earnings_summary()
+
+        elif choice == "5":
+            print("Goodbye!")
             break
 
         else:

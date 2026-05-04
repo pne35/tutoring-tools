@@ -1,6 +1,6 @@
 import json
 from pathlib import Path
-
+from datetime import datetime
 
 CLIENTS_FILE = Path(__file__).parent / "Data" / "clients.json"
 
@@ -17,6 +17,55 @@ def load_clients(file_path=CLIENTS_FILE):
 
     return data.get("clients", [])
 
+def earnings_summary(file_path=CLIENTS_FILE):
+    """Print weekly and monthly earnings summary."""
+    clients = load_clients(file_path)
+    
+    now = datetime.now()
+    current_week = now.isocalendar().week
+    current_month = now.month
+    current_year = now.year
+
+    weekly_earned = 0
+    weekly_owed = 0
+    monthly_earned = 0
+    monthly_owed = 0
+    total_owed = 0
+
+    for client in clients:
+        rate = client.get("rate", 0)
+        for session in client.get("sessions", []):
+            try:
+                date = datetime.strptime(session["date"], "%Y-%m-%d")
+            except ValueError:
+                continue
+
+            amount = rate * session.get("duration", 0)
+            paid = session.get("paid", False)
+
+            if date.isocalendar().week == current_week and date.year == current_year:
+                if paid:
+                    weekly_earned += amount
+                else:
+                    weekly_owed += amount
+
+            if date.month == current_month and date.year == current_year:
+                if paid:
+                    monthly_earned += amount
+                else:
+                    monthly_owed += amount
+
+            # Total unpaid
+            if not paid:
+                total_owed += amount
+
+    print(f"\n{'='*35}")
+    print(f"  EARNINGS SUMMARY")
+    print(f"{'='*35}")
+    print(f"  This week:   £{weekly_earned:.2f} earned  |  £{weekly_owed:.2f} owed")
+    print(f"  This month:  £{monthly_earned:.2f} earned  |  £{monthly_owed:.2f} owed")
+    print(f"  Total owed:  £{total_owed:.2f}")
+    print(f"{'='*35}\n")
 
 def save_clients(clients, file_path=CLIENTS_FILE):
     """Save clients to the JSON data file."""
