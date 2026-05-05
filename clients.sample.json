@@ -6,17 +6,21 @@
       "rate": 15,
       "contact": "parent@email.com",
       "notes": "",
+      "joint_session": false,
+      "weak_topics": ["quadratics", "simultaneous equations"],
       "sessions": [
         {
           "date": "2026-05-04",
           "duration": 1,
           "topic": "Algebra - Quadratics",
+          "weak_topics": ["quadratics"],
           "paid": true
         },
         {
           "date": "2026-05-11",
           "duration": 1,
           "topic": "Algebra - Simultaneous Equations",
+          "weak_topics": ["simultaneous equations"],
           "paid": false
         }
       ]
@@ -27,12 +31,51 @@
       "rate": 15,
       "contact": "janeparent@email.com",
       "notes": "Struggles with fractions",
+      "joint_session": false,
+      "weak_topics": ["fractions"],
       "sessions": [
         {
           "date": "2026-05-05",
           "duration": 1,
           "topic": "Fractions and Decimals",
+          "weak_topics": ["fractions"],
           "paid": true
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Alex Twin",
+      "rate": 10,
+      "contact": "twinparent@email.com",
+      "notes": "Joint session with ID 4",
+      "joint_session": true,
+      "weak_topics": ["speed-distance-time graphs"],
+      "sessions": [
+        {
+          "date": "2026-05-06",
+          "duration": 1,
+          "topic": "Speed/Distance/Time Graphs",
+          "weak_topics": ["speed-distance-time graphs"],
+          "paid": false
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Jordan Twin",
+      "rate": 10,
+      "contact": "twinparent@email.com",
+      "notes": "Joint session with ID 3",
+      "joint_session": true,
+      "weak_topics": ["speed-distance-time graphs"],
+      "sessions": [
+        {
+          "date": "2026-05-06",
+          "duration": 1,
+          "topic": "Speed/Distance/Time Graphs",
+          "weak_topics": ["speed-distance-time graphs"],
+          "paid": false
         }
       ]
     }
